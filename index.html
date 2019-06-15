@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Minimal Book Example</title>
+  <title>Free and Open Source Software for Landscape History</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Minimal Book Example" />
+  <meta property="og:title" content="Free and Open Source Software for Landscape History" />
   <meta property="og:type" content="book" />
   
   
@@ -16,12 +16,12 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Minimal Book Example" />
+  <meta name="twitter:title" content="Free and Open Source Software for Landscape History" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Yihui Xie" />
+<meta name="author" content="David Lovelace and Robin Lovelace" />
 
 
 <meta name="date" content="2019-06-15" />
@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Free and Open Source Software for Landscape History</a>
           </h1>
         </div>
 
@@ -160,19 +160,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<p class="author"><em>Yihui Xie</em></p>
+<h1 class="title">Free and Open Source Software for Landscape History</h1>
+<p class="author"><em>David Lovelace and Robin Lovelace</em></p>
 <p class="date"><em>2019-06-15</em></p>
 </div>
 <div id="prerequisites" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
 <p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="co"># or the development version</span>
-<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre>
+<p>The required packages can be installed from CRAN or Github:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</code></pre>
 <p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<p>Reproducible maps can be included, e.g. as follows (source: this <a href="https://github.com/katyrobin/tithe-map-tiles">repo</a> and this issue):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tmap)
+<span class="kw">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)
+pt =<span class="st"> &quot;https://katyrobin.github.io/tithe-map-tiles/hereford-many/{z}/{x}/{y}.png&quot;</span>
+h =<span class="st"> </span>osmdata<span class="op">::</span><span class="kw">getbb</span>(<span class="st">&quot;hereford, uk&quot;</span>, <span class="dt">format_out =</span> <span class="st">&quot;sf_polygon&quot;</span>)
+m =<span class="st"> </span><span class="kw">tm_basemap</span>(leaflet<span class="op">::</span>providers<span class="op">$</span>OpenStreetMap) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_tiles</span>(pt, <span class="dt">tms =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_shape</span>(h) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_borders</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_view</span>(<span class="dt">set.view =</span> <span class="kw">c</span>(
+    sf<span class="op">::</span><span class="kw">st_coordinates</span>(sf<span class="op">::</span><span class="kw">st_centroid</span>(h))[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">0.004</span>,
+    sf<span class="op">::</span><span class="kw">st_coordinates</span>(sf<span class="op">::</span><span class="kw">st_centroid</span>(h))[<span class="dv">2</span>],
+    <span class="dv">16</span>
+  ))</code></pre>
+<iframe id="serviceFrameSend" src="m.html" width="100%" height="400"  frameborder="0">
 
 </div>
             </section>
@@ -211,8 +224,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/foss4lh/foss4lh/edit/master/index.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,

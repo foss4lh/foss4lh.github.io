@@ -23,8 +23,8 @@
 }{}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={A Minimal Book Example},
-            pdfauthor={Yihui Xie},
+            pdftitle={Free and Open Source Software for Landscape History},
+            pdfauthor={David Lovelace and Robin Lovelace},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -116,10 +116,10 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{A Minimal Book Example}
+  \title{Free and Open Source Software for Landscape History}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Yihui Xie}
+    \author{David Lovelace and Robin Lovelace}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
@@ -140,19 +140,37 @@
 
 This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
 
-The \textbf{bookdown} package can be installed from CRAN or Github:
+The required packages can be installed from CRAN or Github:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# or the development version}
-\CommentTok{# devtools::install_github("rstudio/bookdown")}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
 
 To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
+
+Reproducible maps can be included, e.g.~as follows (source: this \href{https://github.com/katyrobin/tithe-map-tiles}{repo} and this issue):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tmap)}
+\KeywordTok{tmap_mode}\NormalTok{(}\StringTok{"view"}\NormalTok{)}
+\NormalTok{pt =}\StringTok{ "https://katyrobin.github.io/tithe-map-tiles/hereford-many/\{z\}/\{x\}/\{y\}.png"}
+\NormalTok{h =}\StringTok{ }\NormalTok{osmdata}\OperatorTok{::}\KeywordTok{getbb}\NormalTok{(}\StringTok{"hereford, uk"}\NormalTok{, }\DataTypeTok{format_out =} \StringTok{"sf_polygon"}\NormalTok{)}
+\NormalTok{m =}\StringTok{ }\KeywordTok{tm_basemap}\NormalTok{(leaflet}\OperatorTok{::}\NormalTok{providers}\OperatorTok{$}\NormalTok{OpenStreetMap) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_tiles}\NormalTok{(pt, }\DataTypeTok{tms =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_shape}\NormalTok{(h) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_borders}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_view}\NormalTok{(}\DataTypeTok{set.view =} \KeywordTok{c}\NormalTok{(}
+\NormalTok{    sf}\OperatorTok{::}\KeywordTok{st_coordinates}\NormalTok{(sf}\OperatorTok{::}\KeywordTok{st_centroid}\NormalTok{(h))[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\FloatTok{0.004}\NormalTok{,}
+\NormalTok{    sf}\OperatorTok{::}\KeywordTok{st_coordinates}\NormalTok{(sf}\OperatorTok{::}\KeywordTok{st_centroid}\NormalTok{(h))[}\DecValTok{2}\NormalTok{],}
+    \DecValTok{16}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
